@@ -1,0 +1,8 @@
+name: snakemake_env # Environment name
+channels:
+  - bioconda # Bioinformatics Package Channel
+  - conda-forge # General Package Channel
+dependencies:
+  - snakemake # Snakemake Tool
+  - openjdk # Java runtime, required to run snpEff
+  - snpEff # Genetic variant annotation tool
