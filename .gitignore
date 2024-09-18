@@ -1,3 +1,4 @@
 .env_varAnno/
 .snakemake
+__pycache__
 notes.md
