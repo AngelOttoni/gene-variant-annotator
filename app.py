@@ -4,19 +4,19 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Função para carregar e filtrar dados
+# Function to load and filter data
 def load_and_filter_vcf(min_freq, min_dp):
-    # Carregar o arquivo VCF
+    # Upload the VCF file
     vcf_file = 'results/annotated_variants.vcf'
     vcf = pysam.VariantFile(vcf_file)
     
-    # Criar uma lista para armazenar variantes
+    # Create a list to store variants
     variants = []
     
-    # Iterar sobre variantes no arquivo VCF
+    # Iterate over variants in VCF file
     for rec in vcf.fetch():
-        freq = rec.info.get('AF', [0])[0]  # Exemplo de como pegar a frequência (AF)
-        dp = rec.info.get('DP', 0)          # Profundidade (DP)
+        freq = rec.info.get('AF', [0])[0]  # Example of how to get the frequency (AF)
+        dp = rec.info.get('DP', 0)          # Depth (DP)
         
         if freq >= min_freq and dp >= min_dp:
             variants.append({

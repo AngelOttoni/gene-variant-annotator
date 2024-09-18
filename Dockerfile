@@ -1,20 +1,20 @@
-# Use a imagem base do Python
+# Use the Python base image
 FROM python:3.12-slim
 
-# Define o diretório de trabalho dentro do contêiner
+# Sets the working directory within the container
 WORKDIR /app
 
-# Copia os arquivos de requisitos para o contêiner
+# Copy the requirements files to the container
 COPY requirements.txt requirements.txt
 
-# Instala as dependências do projeto
+# Installs project dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o restante dos arquivos da aplicação para o contêiner
+# Copies the rest of the application files to the container
 COPY . .
 
-# Exponha a porta na qual o Flask vai rodar
+# Expose the port on which Flask will run
 EXPOSE 5000
 
-# Define o comando para iniciar a aplicação Flask
+# Set the command to start the Flask application
 CMD ["flask", "run", "--host=0.0.0.0"]
