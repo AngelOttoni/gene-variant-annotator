@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Variant Filter</title>
+</head>
+<body>
+    <h1>Filter Variants</h1>
+    <form action="/filter" method="get">
+        <label for="min_freq">Min Frequency:</label>
+        <input type="number" id="min_freq" name="min_freq" step="0.01" min="0">
+        <br>
+        <label for="min_dp">Min Depth:</label>
+        <input type="number" id="min_dp" name="min_dp" min="0">
+        <br>
+        <input type="submit" value="Filter">
+    </form>
+
+    <h2>Results:</h2>
+    <div id="results"></div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const minFreq = document.querySelector('#min_freq').value;
+            const minDp = document.querySelector('#min_dp').value;
+            const resultsDiv = document.querySelector('#results');
+            
+            fetch(`/filter?min_freq=${minFreq}&min_dp=${minDp}`)
+                .then(response => response.json())
+                .then(data => {
+                    resultsDiv.innerHTML = '<ul>' + data.map(variant => 
+                        `<li>Chrom: ${variant.chrom}, Pos: ${variant.pos}, ID: ${variant.id}, Ref: ${variant.ref}, Alt: ${variant.alt}, Frequency: ${variant.frequency}, DP: ${variant.DP}</li>`
+                    ).join('') + '</ul>';
+                });
+        });
+    </script>
+</body>
+</html>
